@@ -19,13 +19,14 @@ class Post(models.Model):
                                     verbose_name="publication date")
     author = models.ForeignKey(
         User,
-        models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='posts'
     )
     group = models.ForeignKey(
         'Group',
-        on_delete=models.CASCADE,
-        blank=True, null=True,
+        models.SET_NULL,
+        blank=True,
+        null=True,
         related_name='posts'
     )
 
