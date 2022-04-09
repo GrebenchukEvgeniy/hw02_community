@@ -1,15 +1,12 @@
-<!DOCTYPE html> <!-- Используется html 5 версии -->
 {% extends 'base.html' %}
 
 {% block title %}
-{{ title }}
+  Здесь будет информация о группах проекта Yatube
 {% endblock %}
 
 {% block content %}
   <main>
-    <!-- класс py-5 создает отступы сверху и снизу блока -->
     <div class="container py-5">
-      <h1>Лев Толстой – зеркало русской революции.</h1>
       {% for post in posts %}
       <p>
         Записи сообщества {{ group }}

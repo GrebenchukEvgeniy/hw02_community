@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-# Из модуля auth импортируем функцию get_user_model
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -17,20 +14,20 @@ class Group(models.Model):
 
 
 class Post(models.Model):
-    # Тип: TextField
     text = models.TextField()
-    # Тип поля: DateTimeField, для хранения даты и времени;
-    # параметр auto_now_add определяет, что в поле будет автоматически
-    # подставлено время и дата создания новой записи
-    pub_date = models.DateTimeField(auto_now_add=True)
-    # Тип: ForeignKey, ссылка на модель User
+    pub_date = models.DateTimeField(auto_now_add=True,
+                                    verbose_name="publication date")
     author = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
+        models.SET_NULL,
         related_name='posts'
     )
     group = models.ForeignKey(
         'Group',
         on_delete=models.CASCADE,
-        blank=True, null=True
+        blank=True, null=True,
+        related_name='posts'
     )
+
+    class Meta:
+        ordering = ['-pub_date']
